@@ -402,4 +402,6 @@ FodyWeavers.xsd
 
 # Ignore environment.ts files
 *environment.ts
+*environment.prod.ts
+
 
