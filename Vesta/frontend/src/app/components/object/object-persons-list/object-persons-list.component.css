@@ -1,0 +1,4 @@
+.table-cell-multiline {
+  white-space: pre-line;
+  word-wrap: break-word;
+}

@@ -1,0 +1,40 @@
+.navbar {
+  max-height: 50px;
+  margin-top: 1px;
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: #2176ff;
+}
+
+#icon {
+  width: 500px;
+}
+
+.navbar-nav {
+  right: auto;
+  margin-left: auto;
+}
+
+.navbar .navbar-brand {
+  margin-right: 0;
+}
+
+.navbar .navbar-toggler {
+  margin-right: 0;
+}
+
+.navbar-nav img {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  width: 35px;
+}
+
+.dropdown-menu {
+  position: absolute !important;
+  right: 0;
+  left: auto;
+}
+
+
+

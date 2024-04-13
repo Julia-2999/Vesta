@@ -1,0 +1,24 @@
+<div class="form">
+  <div class="formTop d-flex justify-content-between">
+      <input type="text" placeholder=" Szukaj..." id="search" #searchInput class="flex-grow-1">
+      <button class="search" (click)="search(searchInput.value)">
+        <i class="bi bi-search"></i>
+      </button>
+      <button *ngIf="roleService.isAdmin()" (click)="openModal()" class="btn btn-primary float-right m-1">
+        <i class="bi bi-plus-circle"></i>
+      </button>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let building of filteredBuildings" class="col-sm-3 p-2">
+      <app-object-card [building]="building" (deleteRequest)="deleteBuilding($event)" ></app-object-card>
+    </div>
+  </div>
+</div>
+
+<app-add-object-modal #addBuildingModal >
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modalClose()">Zamknij</button>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+  </div>
+</app-add-object-modal>

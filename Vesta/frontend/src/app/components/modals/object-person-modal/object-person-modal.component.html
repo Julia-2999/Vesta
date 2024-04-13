@@ -1,0 +1,83 @@
+<ng-template #objectPersonModal>
+  <div class="modal-header" ngbAutofocus>
+    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="personForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="displayName" class="col-form-label">Nazwa</label>
+        <input type="text" class="form-control" id="displayName" formControlName="displayName">
+        <span *ngIf="!displayName.valid && (displayName.touched || submitted)" class="error-block">
+          Wprowadź nazwę
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="street" class="col-form-label">Ulica</label>
+        <input type="text" class="form-control"  id="street" formControlName="street">
+        <span *ngIf="!street.valid && (street.touched || submitted)" class="error-block">
+          Wprowadź ulicę
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="number" class="col-form-label">Numer</label>
+        <input type="number" class="form-control"  id="number" formControlName="number">
+        <span *ngIf="!number.valid && (number.touched || submitted)" class="error-block">
+          Wprowadź numer
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="zipcode" class="col-form-label">Kod pocztowy</label>
+        <input type="text" class="form-control"  id="zipcode" formControlName="zipcode">
+        <span *ngIf="!zipcode.valid && (zipcode.touched || submitted)" class="error-block">
+          Wprowadź kod pocztowy
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="col-form-label">Miejscowość</label>
+        <input type="text" class="form-control"  id="city" formControlName="city">
+        <span *ngIf="!city.valid && (city.touched || submitted)" class="error-block">
+          Wprowadź miejscowość
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="col-form-label">E-mail</label>
+        <input type="email" class="form-control"  id="email" formControlName="email">
+        <span *ngIf="!email.valid && (email.touched || submitted)" class="error-block">
+          Wprowadź adres e-mail
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="col-form-label">Telefon</label>
+        <input type="text" class="form-control" id="phone" formControlName="phone">
+        <span *ngIf="!phone.valid && (phone.touched || submitted)" class="error-block">
+          Wprowadź numer telefonu
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="authorizationType" class="col-form-label">Typ upoważnienia</label>
+        <select class="form-select form-control" id="authorizationType" formControlName="authorizationType">
+          <option value="unlimited">Bezterminowe</option>
+          <option value="temporary">Czasowe</option>
+        </select>
+      </div>
+      <div *ngIf="personForm.get('authorizationType').value === 'temporary'">
+        <div class="mb-3">
+          <label for="authStartDate" class="col-form-label">Data od</label>
+          <input type="date" class="form-control" id="authStartDate" formControlName="authStartDate">
+        </div>
+        <div class="mb-3">
+          <label for="authEndDate" class="col-form-label">Data do</label>
+          <input type="date" class="form-control" id="authEndDate" formControlName="authEndDate">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="role" class="col-form-label">Rola</label>
+        <input type="role" class="form-control"  id="role" formControlName="role">
+      </div>
+      <label for="additionalInfo" class="col-form-label">Dodatkowe informacje</label>
+      <textarea rows="2" type="text" class="form-control" id="additionalInfo" formControlName="additionalInfo"></textarea>
+      <ng-content></ng-content>
+    </form>
+  </div>
+</ng-template>
+

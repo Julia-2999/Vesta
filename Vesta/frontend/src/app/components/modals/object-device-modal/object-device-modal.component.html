@@ -1,0 +1,52 @@
+<ng-template #objectDeviceModal>
+  <div class="modal-header" ngbAutofocus>
+    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="objectDeviceForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="col-form-label">Nazwa</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <span *ngIf="!name.valid && (name.touched || submitted)" class="error-block">
+          Wprowadź nazwę
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="rtspUrl" class="col-form-label">Link RTSP</label>
+        <input type="text" class="form-control" id="rtspUrl" formControlName="rtspUrl" *ngIf="roleService.isAdmin()">
+        <h5 *ngIf="!roleService.isAdmin()" class="mb-0">*****</h5>
+        <span *ngIf="!rtspUrl.valid && (rtspUrl.touched || submitted)" class="error-block">
+          Wprowadź link RTSP
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="producer" class="col-form-label">Producent</label>
+        <input type="text" class="form-control" id="producer" formControlName="producer">
+      </div>
+      <div class="mb-3">
+        <label for="model" class="col-form-label">Model</label>
+        <input type="text" class="form-control" id="model" formControlName="model">
+      </div>
+      <div class="mb-3">
+        <label for="serialNumber" class="col-form-label">Numer seryjny</label>
+        <input type="text" class="form-control" id="serialNumber" formControlName="serialNumber">
+      </div>
+      <div class="form-group">
+        <div [class.disabled]="!roleService.isAdmin() || !this.modalEnabled">
+          <label for="formFile" class="form-label">Wybierz miniaturkę</label>
+          <input class="form-control" type="file" id="formFile" (change)="onFileChange($event)" accept="image/png, image/jpeg" formControlName="file">
+          <span *ngIf="this.selectedImage === null && this.imageUrl === '' && submitted" class="error-block">
+            Załaduj plik
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="img-container">
+          <img *ngIf="imageUrl" [src]="imageUrl" alt="Miniaturka" class="thumbnail-image">
+          <span *ngIf="!imageUrl">Brak dodanej miniaturki</span>
+        </div>
+      </div>
+      <ng-content></ng-content>
+    </form>
+  </div>
+</ng-template>

@@ -1,0 +1,68 @@
+<ng-template #objectServiceModal>
+  <div class="modal-header" ngbAutofocus>
+    <h5 class="modal-title" id="addServiceModal">{{ modalConfig.modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="name" class="col-form-label">Nazwa</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <span *ngIf="!roleService.isServiceTechnician() && !name.valid && (name.touched || submitted)" class="error-block">
+          Wprowadź nazwę
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="type" class="col-form-label">Typ</label>
+        <select class="form-select form-control" id="type" formControlName="type">
+          <option *ngFor="let typeDoc of docType" [ngValue]="typeDoc.value">{{ typeDoc.label }}</option>
+        </select>
+        <span *ngIf="!roleService.isServiceTechnician()  && !type.valid && (type.touched || submitted)" class="error-block">
+          Wybierz typ
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="state" class="col-form-label">Status</label>
+        <select class="form-select form-control" id="state" formControlName="state">
+          <option *ngFor="let stateDoc of docState" [ngValue]="stateDoc.value">{{ stateDoc.label }}</option>
+        </select>
+        <span *ngIf="!roleService.isServiceTechnician() && !state.valid && (state.touched || submitted)" class="error-block">
+          Wybierz status
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="priority" class="col-form-label">Priorytet</label>
+        <select class="form-select form-control" id="priority" formControlName="priority">
+          <option *ngFor="let priorityServDoc of docPriority" [ngValue]="priorityServDoc.value">{{ priorityServDoc.label }}</option>
+        </select>
+        <span *ngIf="!roleService.isServiceTechnician() && !priority.valid && (priority.touched || submitted)" class="error-block" >
+          Wybierz priorytet
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="contractor" class="col-form-label">Wykonawca</label>
+        <select class="form-select form-control" id="contractor" formControlName="contractor">
+          <option *ngFor="let serviceContractor of serviceContractors" [ngValue]="serviceContractor.id">{{ serviceContractor.displayName }}</option>
+        </select>
+        <span *ngIf="!roleService.isServiceTechnician() && !contractor.valid && (contractor.touched || submitted)" class="error-block">
+          Wybierz wykonawcę
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="requirements" class="col-form-label">Opis wymagań</label>
+        <textarea rows="2" type="text" class="form-control" id="requirements" formControlName="requirements"></textarea>
+        <span *ngIf="modalEnabled && !requirements.valid && (requirements.touched || submitted)" class="error-block">
+          Wpisz opis wymagań
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="works" class="col-form-label">Opis prac</label>
+        <div>
+        <textarea rows="7" class="form-control" id="works" formControlName="works" [attr.disabled]="true"></textarea>
+        <textarea rows="2" class="form-control" id="works" formControlName="newWorkEntry"></textarea>
+        </div>
+      </div>
+      <ng-content></ng-content>
+    </form>
+  </div>
+</ng-template>
+

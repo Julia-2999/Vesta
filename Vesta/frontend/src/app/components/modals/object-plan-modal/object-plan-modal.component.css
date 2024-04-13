@@ -1,0 +1,11 @@
+.form-group{
+  margin-top: 10px;
+  width: 100%;
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #ccc;
+}

@@ -1,0 +1,38 @@
+<ng-template #userModal>
+  <div class="modal-header" ngbAutofocus>
+    <h5 class="modal-title">{{ modalConfig.modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="displayName" class="col-form-label">Imię i nazwisko</label>
+        <input type="text" class="form-control" id="displayName" formControlName="displayName">
+        <span *ngIf="!displayName.valid && (displayName.touched || submitted)" class="error-block">
+          Wprowadź imię i nazwisko
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="col-form-label">E-mail</label>
+        <input type="text" class="form-control" id="email" formControlName="email">
+        <span *ngIf="!email.valid && (email.touched || submitted)" class="error-block">
+          Wprowadź email
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="role" class="col-form-label">Uprawnienie</label>
+        <select class="form-select form-control" id="role" formControlName="role">
+          <option *ngFor="let role of userRoles" [ngValue]="role.value">{{ role.label }}</option>
+        </select>
+      </div>
+      <div class="select-form mb-3" *ngIf="userForm.get('role').value === 1">
+        <label class="col-form-label">Budynki dostępne dla użytkownika</label>
+        <select class="form-select form-control select-checkbox" id="selectedBuildings" formControlName="selectedBuildings" multiple>
+          <option *ngFor="let building of availableBuildings" [value]="building.id">
+            {{ building.synonym + ' ' + building.name }}
+          </option>
+        </select>
+      </div>
+      <ng-content></ng-content>
+    </form>
+  </div>
+</ng-template>

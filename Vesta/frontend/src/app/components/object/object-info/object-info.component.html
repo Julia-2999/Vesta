@@ -1,0 +1,93 @@
+<div class="nav">
+  <app-sidebar></app-sidebar>
+</div>
+
+<div class = "content">
+  <div *ngIf="this.buildingData"  class="building-info bg-white shadow-sm">
+    <div class="object-info">
+      <p>
+        <i class="bi bi-info-circle"></i>
+        {{this.buildingData.synonym + ', ' + this.buildingData.name + ' ul.' + this.buildingData.street + ' ' + this.buildingData.number + ', ' +  this.buildingData.zipCode + ' ' +  this.buildingData.city}}
+      </p>
+    </div>
+  </div>
+  <div class="mb-0 bg-white p-4 shadow-sm">
+    <div>
+      <button class="btn btn-primary float-right" routerLink="object-list"><i class="bi bi-house"></i></button>
+    </div>
+
+    <form [formGroup]="objectInfoForm" (ngSubmit)="onSubmit()" >
+      <div class="form-group">
+        <label for="synonym">Synonim</label>
+        <input type="text" class="form-control" formControlName="objSynonym" id="synonym">
+        <span *ngIf="!objSynonym.valid && (objSynonym.touched || submitted)" class="error-block">
+            Wprowadź synonim obiektu
+        </span>
+      </div>
+      <div class="form-group">
+        <label for="name">Nazwa</label>
+        <input type="text" class="form-control" formControlName="objName" id="name">
+        <span *ngIf="!objName.valid && (objName.touched || submitted)" class="error-block">
+          Wprowadź nazwę obiektu
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="street">Ulica</label>
+        <input type="text" class="form-control" formControlName="objStreet" id="street">
+        <span *ngIf="!objStreet.valid && (objStreet.touched || submitted)" class="error-block">
+          Wprowadź ulicę
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="number">Numer</label>
+        <input type="text" class="form-control" formControlName="objNumber" id="number">
+        <span *ngIf="!objNumber.valid && (objNumber.touched || submitted)" class="error-block">
+          Wprowadź numer
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="city">Miejscowość</label>
+        <input type="text" class="form-control" formControlName="objCity" id="city">
+        <span *ngIf="!objCity.valid && (objCity.touched || submitted)" class="error-block">
+          Wprowadź miejscowość
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="zipcode">Kod pocztowy</label>
+        <input type="text" class="form-control" formControlName="objZipCode" id="zipcode">
+        <span *ngIf="!objZipCode.valid && (objZipCode.touched || submitted)" class="error-block">
+          Wprowadź kod pocztowy
+      </span>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" formControlName="objEmail" id="email">
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefon</label>
+        <input type="text" class="form-control" formControlName="objPhone" id="phone">
+      </div>
+      <div class="form-group">
+        <label for="additionalInfo">Dodatkowe informacje</label>
+        <textarea rows="2" type="text" class="form-control" formControlName="objAdditionalInfo" id="additionalInfo"></textarea>
+      </div>
+      <div class="form-group">
+        <div  [class.disabled]="!roleService.isAdmin()">
+          <label for="formFile" class="form-label">Wybierz zdjęcie</label>
+          <input class="form-control" type="file" id="formFile" (change)="onFileChange($event)" accept="image/png, image/jpeg" formControlName="objPhoto">
+        </div>
+      </div>
+      <div  class="form-group">
+        <img *ngIf="imageUrl" [src]="imageUrl" alt="Miniaturka" class="thumbnail-image">
+        <span *ngIf="!imageUrl">Brak dodanego zdjęcia</span>
+      </div>
+
+      <div *ngIf="roleService.isAdmin()" class="form-group">
+        <button type="submit" class="btn btn-primary m-1">Zapisz</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+

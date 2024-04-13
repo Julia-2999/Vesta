@@ -1,0 +1,72 @@
+<ng-template #addBuildingModal>
+  <div class="modal-header" ngbAutofocus>
+    <h5 class="modal-title" id="addBuildingModalLabel">Dane obiektu</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="addBuildingForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="synonym" class="col-form-label">Synonim</label>
+        <input type="text"  maxlength="20" class="form-control" id="synonym" formControlName="objSynonym">
+        <span *ngIf="!objSynonym.valid && (objSynonym.touched || submitted)" class="error-block">
+          Wprowadź synonim obiektu
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="name" class="col-form-label">Nazwa</label>
+        <input type="text"  maxlength="45" class="form-control" id="name" formControlName="objName">
+        <span *ngIf="!objName.valid && (objName.touched || submitted)" class="error-block">
+          Wprowadź nazwę obiektu
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="street" class="col-form-label">Ulica</label>
+        <input type="text" maxlength="45" class="form-control" id="street" formControlName="objStreet">
+        <span *ngIf="!objStreet.valid && (objStreet.touched || submitted)" class="error-block">
+          Wprowadź ulicę
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="number" class="col-form-label">Numer</label>
+        <input type="number" class="form-control" id="number" formControlName="objNumber">
+        <span *ngIf="!objNumber.valid && (objNumber.touched || submitted)" class="error-block">
+          Wprowadź numer
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="zipcode" class="col-form-label">Kod pocztowy</label>
+        <input type="text" maxlength="10" class="form-control" id="zipcode" formControlName="objZipCode">
+        <span *ngIf="!objZipCode.valid && (objZipCode.touched || submitted)" class="error-block">
+          Wprowadź kod pocztowy
+      </span>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="col-form-label">Miejscowość</label>
+        <input type="text" maxlength="30" class="form-control" id="city" formControlName="objCity">
+        <span *ngIf="!objCity.valid && (objCity.touched || submitted)" class="error-block">
+          Wprowadź miejscowość
+        </span>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="col-form-label">E-mail</label>
+        <input type="email" maxlength="25" class="form-control" id="email" formControlName="objEmail">
+        <span *ngIf="!objEmail.errors && this.objEmail.value !== '' && submitted" class="error-block">
+          Wprowadź poprawny adres email
+        </span>
+    </div>
+      <div class="mb-3">
+        <label for="phone" class="col-form-label">Telefon</label>
+        <input type="text" class="form-control" id="phone" formControlName="objPhone">
+      </div>
+      <div class="mb-3">
+        <label for="additionalInfo">Dodatkowe informacje</label>
+        <textarea rows="2" maxlength="256" type="text" class="form-control" id="additionalInfo" formControlName="objAdditionalInfo"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Zdjęcie</label>
+        <input class="form-control" (change)="onFileChange($event)" type="file" id="formFile" accept="image/png, image/jpeg" formControlName="objPhoto">
+      </div>
+      <ng-content></ng-content>
+    </form>
+  </div>
+
+</ng-template>

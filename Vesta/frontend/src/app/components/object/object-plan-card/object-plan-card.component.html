@@ -1,0 +1,32 @@
+  <div class="gallery">
+    <div class="container">
+      <a target="_blank" href="{{plan.imageUrl}}">
+        <img *ngIf="plan.imageUrl !== null" class="card-img-top" src="{{plan.imageUrl}}">
+      </a>
+      <ul class="list-inline text-center member-icons animate">
+        <li *ngIf="roleService.isAdmin()" class="list-inline-item">
+          <button class="btn btn-primary" (click)="editPlan(plan)">
+            <i class="bi bi-pencil"></i>
+          </button>
+        </li>
+        <li class="list-inline-item" (click)="open(plan.imageUrl)">
+          <button class="btn btn-primary">
+            <i class="bi bi-eye"></i>
+          </button>
+        </li>
+        <li class="list-inline-item">
+            <button class="btn btn-primary" (click)="saveToPdf()">
+              <i class="bi bi-filetype-pdf"></i>
+          </button>
+        </li>
+        <li *ngIf="roleService.isAdmin()" class="list-inline-item">
+          <button  class="btn btn-danger" (click)="deletePlan(plan.id.toString())">
+            <i class="bi bi-trash3"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="desc">{{plan.description}}</div>
+  </div>
+
+

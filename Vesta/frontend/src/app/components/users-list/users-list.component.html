@@ -1,0 +1,59 @@
+<div class="container mt-3 mb-4">
+  <div class="mb-0 bg-white p-4 shadow-sm">
+    <div class="formTop d-flex justify-content-between">
+      <input type="text" placeholder=" Szukaj..." id="search" #searchInput class="flex-grow-1">
+      <button class="search" (click)="search(searchInput.value)">
+        <i class="bi bi-search"></i>
+      </button>
+
+      <button class="btn btn-primary float-right m-1" routerLink="object-list"><i class="bi bi-house"></i></button>
+      <button (click)="openModal('add')" class="btn btn-primary float-right m-1" >
+        <i class="bi bi-plus-circle"></i>
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="pt-1">
+        <div class="dashboard-info-box table-responsive mb-0 p-4">
+          <table class="table table-fixed manage-top mb-0">
+            <thead>
+              <tr>
+                <th style="width: 30%;">Nazwa</th>
+                <th style="width: 30%;">E-mail</th>
+                <th style="width: 25%;">Uprawnienie</th>
+                <th style="width: 15%;" class="text-center">Akcja</th>
+              </tr>
+            </thead>
+            <tbody>
+               <tr class="list items-list" *ngFor="let user of filteredUsers">
+                <td class="mb-0 list-item">
+                  {{user.displayName}}
+                </td>
+                <td class="mb-0 list-item">
+                  {{user.email}}
+                </td>
+                <td class="mb-0 list-item">
+                  {{showUserRole(user.role)}}
+                </td>
+                <td class="text-center">
+                  <ul class="list-unstyled mb-0 d-flex justify-content-center">
+                    <li><a (click)="openModal('edit', user, user.id)" class="text-info" data-original-title="Edit" data-bs-toggle="tooltip"><i class="bi bi-pencil-fill"></i></a></li>
+                    <li><a (click)="deleteUser(user.id)" class="text-danger" data-bs-toggle="tooltip" title="" data-original-title="Delete"><i class="bi bi-trash3-fill"></i></a></li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-user-modal #userModal [modalConfig]="modalConfig">
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="modalClose()">Zamknij</button>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+  </div>
+</app-user-modal>
+

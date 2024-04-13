@@ -1,0 +1,22 @@
+<div class="wrapper fadeInDown"  style="position: centre;">
+  <div id="formContent">
+
+    <div class="fadeIn first">
+      <img class="img-responsive" src="assets/img/logo.png" id="icon" alt="Logo" />
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <input type="text" id="userName" class="fadeIn second" placeholder="login" formControlName="userName">
+      <input type="password" id="userPassword" class="fadeIn third" placeholder="hasło" formControlName="userPassword">
+      <input type="submit" class="fadeIn fourth" value="Zaloguj">
+    </form>
+
+    <div id="formFooter">
+      <a class="underlineHover" routerLink="/forgot-password">Zapomniałeś hasła?</a>
+    </div>
+
+  </div>
+</div>
+
+
+

@@ -1,0 +1,46 @@
+<div class="nav">
+  <app-sidebar></app-sidebar>
+</div>
+
+<div class = "content">
+  <div *ngIf="this.buildingData"  class="building-info bg-white shadow-sm">
+    <div class="object-info">
+      <p>
+        <i class="bi bi-info-circle"></i>
+        {{this.buildingData.synonym + ', ' + this.buildingData.name + ' ul.' + this.buildingData.street + ' ' + this.buildingData.number + ', ' +  this.buildingData.zipCode + ' ' +  this.buildingData.city}}
+      </p>
+    </div>
+  </div>
+  <div class="mb-0 bg-white p-4 shadow-sm">
+    <div class="cameras-container">
+      <div class="camera-list">
+        <ul>
+          <li *ngFor="let camera of cameras" (click)="onCameraClick(camera)">
+            <div class="camera-item">
+              <ng-container *ngIf="camera.imageUrl !== ''; else defaultImage">
+                <img [src]="camera.imageUrl" alt="{{ camera.name }}" class="thumbnail">
+              </ng-container>
+
+              <ng-template #defaultImage>
+                <img class="thumbnail" src=" ../../../../../../assets/img/camera_default.jpeg">
+              </ng-template>
+
+              <div class="camera-name">
+                <span>{{ camera.name }}</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <span *ngIf="!cameras || cameras.length === 0">Brak dodanych urządzeń</span>
+      </div>
+
+      <div class="camera-preview">
+        <div class="camera-name-bold">
+          <span  *ngIf="selectedCamera">{{ selectedCamera.name }}</span>
+          <button class="btn btn-primary float-right m-1" routerLink="object-list"><i class="bi bi-house"></i></button>
+          <canvas id="video-canvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

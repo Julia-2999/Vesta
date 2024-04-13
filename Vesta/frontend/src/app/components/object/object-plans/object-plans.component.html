@@ -1,0 +1,42 @@
+<div class="nav">
+  <app-sidebar></app-sidebar>
+</div>
+
+<div class = "content">
+  <div *ngIf="this.buildingData"  class="building-info bg-white shadow-sm">
+    <div class="object-info">
+      <p>
+        <i class="bi bi-info-circle"></i>
+        {{this.buildingData.synonym + ', ' + this.buildingData.name + ' ul.' + this.buildingData.street + ' ' + this.buildingData.number + ', ' +  this.buildingData.zipCode + ' ' +  this.buildingData.city}}
+      </p>
+    </div>
+  </div>
+
+  <div class="mb-0 bg-white p-4 shadow-sm">
+    <div class="formTop d-flex justify-content-between">
+      <input type="text" placeholder=" Szukaj..." id="search" #searchInput class="flex-grow-1">
+      <button class="search" (click)="search(searchInput.value)">
+        <i class="bi bi-search"></i>
+      </button>
+      <button class="btn btn-primary float-right m-1" routerLink="object-list"><i class="bi bi-house"></i></button>
+      <button *ngIf="roleService.isAdmin()" (click)="openModal('add')" class="btn btn-primary float-right m-1">
+        <i class="bi bi-plus-circle"></i>
+      </button>
+    </div>
+
+    <div class="row">
+      <div *ngFor="let plan of filteredPlans" class="col-sm-4 p-2">
+        <app-object-plan-card [plan]="plan" (deleteRequest)="deletePlan($event)"
+        (editRequest)="editPlan($event)"></app-object-plan-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-object-plan-modal #objectPlanModal [modalConfig]="modalConfig">
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modalClose()">Zamknij</button>
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+  </div>
+</app-object-plan-modal>
+

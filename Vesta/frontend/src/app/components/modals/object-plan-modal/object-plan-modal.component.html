@@ -1,0 +1,30 @@
+<ng-template #objectPlanModal>
+  <div class="modal-header" ngbAutofocus>
+    <h5 class="modal-title" id="addPlanModal">{{ modalConfig.modalTitle }}</h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="planForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="formFile" class="form-label">Wybierz zdjęcie</label>
+        <input class="form-control" type="file" id="formFile" (change)="onFileChange($event)" accept="image/png, image/jpeg" formControlName="file">
+        <span *ngIf="!selectedImage && !imageUrl  && submitted" class="error-block">
+          Załaduj plik
+        </span>
+      </div>
+      <div class="form-group">
+        <div class="img-container">
+          <img *ngIf="imageUrl" [src]="imageUrl" alt="Miniaturka" class="thumbnail-image">
+          <span *ngIf="!imageUrl">Brak dodanego zdjęcia</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="col-form-label">Opis</label>
+        <input type="text" class="form-control" id="description"  formControlName="description">
+        <span *ngIf="!description.valid && (description.touched || submitted)" class="error-block">
+          Wprowadź opis
+        </span>
+      </div>
+      <ng-content></ng-content>
+    </form>
+  </div>
+</ng-template>
